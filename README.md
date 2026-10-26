@@ -12,3 +12,22 @@ En esta aplicación, se busca crear una herramienta para registrar los pesos uti
 2. (Desarrollo) Desarrollar e implementar las funcionalidades imprescindibles para que la aplicación cumpla su cometido.
 3. (Diseño) Definir de manera escueta la interfaz de usuario para que sea más fácil de usar y de entender.
 4. (Testeo) Definición de tests.
+
+### 1. Maquetación
+
+La aplicación se va a componer en 2 pantallas, el listado de todos los ejercicios de los cuales se disponga de información, y el detalle de las mismas, donde se podrá crear y listar nuevos apuntes acerca del ejercicio, como el peso y las repeticiones.
+
+![Esquema](src/image.png)
+
+### 2. Desarrollo
+
+El desarrollo se subirá en GitHub https://github.com/VicenteMon/BasicGymNotes.git. A continuación se desarrolla con ha ido el proceso de desarrollo por días y tareas.
+
+- [ ]  Implementación de Room
+- [ ]  Implementación Navigation3
+- [ ]  Crear componente de la lista principal (ejercicios/máquinas)
+- [ ]  Crear componente de búsqueda
+- [ ]  Crear vista principal
+- [ ]  Crear componente para crear registros
+- [ ]  Crear botón para persistir los datos
+- [ ]  Crear componente para listar las anotaciones creadas
