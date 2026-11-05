@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.devtools.ksp")
+    id("androidx.room")
 }
 
 android {
@@ -34,6 +36,11 @@ android {
     buildFeatures {
         compose = true
     }
+
+    //noinspection WrongGradleMethod
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -52,4 +59,9 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
 }
