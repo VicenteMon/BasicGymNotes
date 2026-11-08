@@ -1,0 +1,11 @@
+package com.example.basicgymnotes.entities
+
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
+
+@Entity
+data class Machine (
+    @PrimaryKey val id: Int,
+    val name: String,
+    val image: String,
+)
