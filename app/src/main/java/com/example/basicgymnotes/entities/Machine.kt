@@ -5,7 +5,7 @@ import androidx.room3.PrimaryKey
 
 @Entity
 data class Machine (
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Int = 0,
     val name: String,
     val image: String,
 )

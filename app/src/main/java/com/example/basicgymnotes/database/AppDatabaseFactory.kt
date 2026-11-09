@@ -10,6 +10,7 @@ class AppDatabaseFactory {
         val db = Room.databaseBuilder<AppDatabase>(applicationContext,
             "notes-database")
             .setDriver(AndroidSQLiteDriver())
+            .addCallback(DatabaseSeed())
             .build()
 
         return db
