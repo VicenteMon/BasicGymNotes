@@ -17,7 +17,7 @@ En esta aplicación, se busca crear una herramienta para registrar los pesos uti
 
 La aplicación se va a componer en 2 pantallas, el listado de todos los ejercicios de los cuales se disponga de información, y el detalle de las mismas, donde se podrá crear y listar nuevos apuntes acerca del ejercicio, como el peso y las repeticiones.
 
-![Esquema](src/image.png)
+![Esquema](src/schema_app.png)
 
 ### 2. Desarrollo
 
@@ -31,3 +31,13 @@ El desarrollo se subirá en GitHub https://github.com/VicenteMon/BasicGymNotes.g
 - [ ]  Crear componente para crear registros
 - [ ]  Crear botón para persistir los datos
 - [ ]  Crear componente para listar las anotaciones creadas
+
+### 2.1 Diseño de la base de datos
+
+Para la primera versión de esta aplicación solo se va a necesitar dos tablas. Una para registrar las máquinas que van a componer la aplicación, y otra para los registros creados por el usuario, con una relación entre ellas de Uno a Muchos (1:N).
+
+![Esquema](src/database.png)
+
+#### Links importantes:
+
+Room: https://developer.android.com/training/data-storage/room?hl=es-419
