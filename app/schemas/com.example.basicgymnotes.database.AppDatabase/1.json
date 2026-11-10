@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a19dfff0195b8d291addbfc85f0776ae",
+    "identityHash": "86ae5b0b0237af88fcc33e07cab5d593",
     "entities": [
       {
         "tableName": "Machine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -28,7 +28,7 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
             "id"
           ]
@@ -67,7 +67,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a19dfff0195b8d291addbfc85f0776ae')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '86ae5b0b0237af88fcc33e07cab5d593')"
     ]
   }
 }

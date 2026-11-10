@@ -33,8 +33,8 @@ class DatabaseSeed : RoomDatabase.Callback() {
 
             connection.execSQL(
                 """
-                INSERT INTO Machine (id, name, image)
-                VALUES ('${machine.id}', '${machine.name}', '${machine.image}')
+                INSERT INTO Machine (name, image)
+                VALUES ('${machine.name}', '${machine.image}')
                 """.trimIndent()
             )
 

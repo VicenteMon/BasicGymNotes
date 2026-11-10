@@ -5,7 +5,7 @@ import androidx.room3.PrimaryKey
 
 @Entity
 data class Entry (
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val weight: String,
     val date: String,
 )

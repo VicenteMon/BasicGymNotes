@@ -7,7 +7,7 @@ import com.example.basicgymnotes.daos.MachineDao
 import com.example.basicgymnotes.entities.Entry
 import com.example.basicgymnotes.entities.Machine
 
-@Database(entities = [Machine::class, Entry::class], version = 2)
+@Database(entities = [Machine::class, Entry::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun machineDao(): MachineDao
     abstract fun entryDao(): EntryDao
