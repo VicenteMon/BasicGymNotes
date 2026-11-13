@@ -11,6 +11,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.example.basicgymnotes.database.AppDatabase
 import com.example.basicgymnotes.repositories.GenericViewModelFactory
 import com.example.basicgymnotes.repositories.MachineRepository
+import com.example.basicgymnotes.screens.DetailScreen
 import com.example.basicgymnotes.screens.MachineMainScreen
 import com.example.basicgymnotes.viewmodels.MachineViewModel
 import kotlinx.serialization.Serializable
@@ -33,10 +34,14 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                             MachineViewModel(machineRepository)
                         }
                     )
-                    MachineMainScreen(viewModel)
+                    MachineMainScreen(viewModel) {
+                        backStack.add(Detail)
+                    }
                 }
                 is Detail -> NavEntry(key){
-
+                    DetailScreen({
+                        backStack.removeLastOrNull()
+                    })
                 }
                 else -> NavEntry(Unit) { Text("Unknown route") }
             }
@@ -48,4 +53,4 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
 data object Home
 
 @Serializable
-data class Detail(val id: Int)
+data object Detail

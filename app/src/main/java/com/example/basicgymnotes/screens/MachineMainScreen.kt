@@ -17,13 +17,16 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 @Composable
 fun MachineMainScreen(
     viewModel: MachineViewModel,
-
+    navigateToDetailScreen: (Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Column (
         modifier = Modifier.padding()
     ) {
+        Button(onClick = { navigateToDetailScreen(1)}) {
+            Text(text = "Ir a detalle")
+        }
         Text(fontWeight = FontWeight.Bold, text = "Machine Main Screen:" + uiState.machineList.size)
         uiState.machineList.forEach { machine ->
             Text(text = "Nombre: " + machine.name)

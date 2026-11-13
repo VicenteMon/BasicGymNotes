@@ -14,11 +14,13 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 
 @Composable
 fun DetailScreen(
+    navigateToMainScreen: () -> Unit,
 ) {
 
     Column (
         modifier = Modifier.padding()
     ) {
+        Button(onClick = navigateToMainScreen) { Text(text = "Volver") }
         Text(text = "Detail Screen")
     }
 }
