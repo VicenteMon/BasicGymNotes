@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.basicgymnotes.database.AppDatabaseFactory
+import com.example.basicgymnotes.navigation.NavProvider
 import com.example.basicgymnotes.repositories.MachineRepository
 import com.example.basicgymnotes.screens.MachineMainScreen
 import com.example.basicgymnotes.ui.theme.BasicGymNotesTheme
@@ -20,15 +21,13 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         val db = AppDatabaseFactory().create(applicationContext)
-        val machineRepository = MachineRepository(db)
-        val viewModel = MachineViewModel(machineRepository)
+
+        enableEdgeToEdge()
         setContent {
             BasicGymNotesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MachineMainScreen(viewModel, innerPadding)
-                }
+                NavProvider(applicationContext, db)
             }
         }
     }
