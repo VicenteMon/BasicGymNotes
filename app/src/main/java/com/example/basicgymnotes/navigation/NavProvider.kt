@@ -34,12 +34,12 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                             MachineViewModel(machineRepository)
                         }
                     )
-                    MachineMainScreen(viewModel) {
-                        backStack.add(Detail)
+                    MachineMainScreen(viewModel) { id ->
+                        backStack.add(Detail(id))
                     }
                 }
                 is Detail -> NavEntry(key){
-                    DetailScreen({
+                    DetailScreen( key.machineId, {
                         backStack.removeLastOrNull()
                     })
                 }
@@ -53,4 +53,4 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
 data object Home
 
 @Serializable
-data object Detail
+data class Detail(val machineId: Int)

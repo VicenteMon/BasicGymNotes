@@ -14,6 +14,7 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 
 @Composable
 fun DetailScreen(
+    machineId: Int,
     navigateToMainScreen: () -> Unit,
 ) {
 
@@ -21,6 +22,6 @@ fun DetailScreen(
         modifier = Modifier.padding()
     ) {
         Button(onClick = navigateToMainScreen) { Text(text = "Volver") }
-        Text(text = "Detail Screen")
+        Text(text = "Detail Screen : $machineId")
     }
 }

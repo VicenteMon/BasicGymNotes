@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import com.example.basicgymnotes.viewmodels.MachineViewModel
 
@@ -17,13 +18,14 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 @Composable
 fun MachineMainScreen(
     viewModel: MachineViewModel,
-    navigateToDetailScreen: (Int) -> Unit
+    navigateToDetailScreen: (id: Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Column (
-        modifier = Modifier.padding()
+        modifier = Modifier.padding(20.dp)
     ) {
+
         Button(onClick = { navigateToDetailScreen(1)}) {
             Text(text = "Ir a detalle")
         }
