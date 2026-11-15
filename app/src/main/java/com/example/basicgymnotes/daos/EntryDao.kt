@@ -1,6 +1,7 @@
 package com.example.basicgymnotes.daos
 
 import androidx.room3.Dao
+import androidx.room3.Insert
 import androidx.room3.Query
 import com.example.basicgymnotes.entities.Entry
 
@@ -9,4 +10,6 @@ interface EntryDao {
     @Query("SELECT * FROM entry")
     suspend fun getAll(): List<Entry>
 
+    @Insert
+    suspend fun create(entry: Entry)
 }

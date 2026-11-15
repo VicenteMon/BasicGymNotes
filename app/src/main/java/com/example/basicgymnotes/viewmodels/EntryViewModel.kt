@@ -3,6 +3,7 @@ package com.example.basicgymnotes.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.basicgymnotes.entities.Entry
 import com.example.basicgymnotes.repositories.DetailRepository
 import com.example.basicgymnotes.repositories.MachineRepository
 import com.example.basicgymnotes.states.DetailScreenState
@@ -27,6 +28,16 @@ class EntryViewModel(
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(machineWhitEntries = repository.getEntriesByMachineId(machineId))
             Log.d("EntryViewModel", _uiState.value.machineWhitEntries.toString())
+        }
+    }
+
+    fun setDataInput (data: Float) {
+        _uiState.value = _uiState.value.copy(dataImput = data)
+    }
+
+    fun createEntry(entry: Entry){
+        viewModelScope.launch {
+
         }
     }
 
