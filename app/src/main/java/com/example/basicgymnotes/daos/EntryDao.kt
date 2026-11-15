@@ -8,4 +8,5 @@ import com.example.basicgymnotes.entities.Entry
 interface EntryDao {
     @Query("SELECT * FROM entry")
     suspend fun getAll(): List<Entry>
+
 }
