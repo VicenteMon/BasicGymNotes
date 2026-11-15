@@ -9,19 +9,32 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.basicgymnotes.entities.Entry
+import com.example.basicgymnotes.viewmodels.EntryViewModel
 import com.example.basicgymnotes.viewmodels.MachineViewModel
 
 
 @Composable
 fun DetailScreen(
-    machineId: Int,
+    viewModel: EntryViewModel,
     navigateToMainScreen: () -> Unit,
 ) {
+    val uiState by viewModel.uiState.collectAsState()
 
     Column (
-        modifier = Modifier.padding()
+        modifier = Modifier.padding(top = 20.dp)
     ) {
         Button(onClick = navigateToMainScreen) { Text(text = "Volver") }
-        Text(text = "Detail Screen : $machineId")
+        if(uiState.machineWhitEntries != null){
+            Text(
+                fontWeight = FontWeight.Bold,
+                text = uiState.machineWhitEntries?.machine!!.name
+            )
+            for(entry: Entry in uiState.machineWhitEntries?.entries!!) {
+                Text(text = "Peso: ${entry.weight} Fecha: ${entry.date}")
+            }
+        }
+
     }
 }

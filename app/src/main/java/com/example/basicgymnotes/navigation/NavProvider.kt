@@ -9,10 +9,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.example.basicgymnotes.database.AppDatabase
-import com.example.basicgymnotes.repositories.GenericViewModelFactory
+import com.example.basicgymnotes.repositories.DetailRepository
+import com.example.basicgymnotes.viewmodels.GenericViewModelFactory
 import com.example.basicgymnotes.repositories.MachineRepository
 import com.example.basicgymnotes.screens.DetailScreen
 import com.example.basicgymnotes.screens.MachineMainScreen
+import com.example.basicgymnotes.viewmodels.EntryViewModel
 import com.example.basicgymnotes.viewmodels.MachineViewModel
 import kotlinx.serialization.Serializable
 
@@ -39,7 +41,16 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                     }
                 }
                 is Detail -> NavEntry(key){
-                    DetailScreen( key.machineId, {
+                    val machineRepository = MachineRepository(db)
+                    val detailRepository = DetailRepository(db)
+                    val viewModel = viewModel<EntryViewModel>(
+                        factory = GenericViewModelFactory(
+                            EntryViewModel::class.java
+                        ) {
+                            EntryViewModel(machineRepository, detailRepository, key.machineId)
+                        }
+                    )
+                    DetailScreen(viewModel, {
                         backStack.removeLastOrNull()
                     })
                 }

@@ -14,7 +14,7 @@ interface MachineDao {
 
     @Transaction
     @Query("SELECT * FROM machine WHERE id = :id")
-    suspend fun getMachineWithEntries(id: Int): List<MachineWhitEntry>
+    suspend fun getMachineWithEntries(id: Int): MachineWhitEntry
 
     @Insert
     suspend fun insertMachine(machine: Machine)

@@ -1,4 +1,4 @@
-package com.example.basicgymnotes.repositories
+package com.example.basicgymnotes.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
