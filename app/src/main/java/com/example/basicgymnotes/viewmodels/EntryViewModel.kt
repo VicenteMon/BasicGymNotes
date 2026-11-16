@@ -31,14 +31,23 @@ class EntryViewModel(
         }
     }
 
-    fun setDataInput (data: Float) {
+    fun setDataInput (data: String) {
         _uiState.value = _uiState.value.copy(dataImput = data)
     }
 
-    fun createEntry(entry: Entry){
+    fun createEntry(){
         viewModelScope.launch {
+            val entry: Entry = Entry(
+                machineId = machineId,
+                weight = _uiState.value.dataImput.toFloat(),
+                date = "16/11/2026"
+            )
 
+            detailRepository.create(entry)
+
+            loadDetails(machineId)
         }
+
     }
 
 }

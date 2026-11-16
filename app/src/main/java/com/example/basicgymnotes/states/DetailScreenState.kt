@@ -5,5 +5,5 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 
 data class DetailScreenState (
     val machineWhitEntries: MachineWhitEntry? = null,
-    val dataImput: Float = 0.0f
+    val dataImput: String = ""
 )

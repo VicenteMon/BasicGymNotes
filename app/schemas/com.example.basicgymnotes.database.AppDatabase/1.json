@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cf9fd1bf480f1e701dbf6240992ea1ae",
+    "identityHash": "77bc277994bda8c1aaa8bc2b42fc7866",
     "entities": [
       {
         "tableName": "Machine",
@@ -36,7 +36,7 @@
       },
       {
         "tableName": "Entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `machineId` INTEGER NOT NULL, `weight` TEXT NOT NULL, `date` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `machineId` INTEGER NOT NULL, `weight` REAL NOT NULL, `date` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -53,7 +53,7 @@
           {
             "fieldPath": "weight",
             "columnName": "weight",
-            "affinity": "TEXT",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -73,7 +73,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf9fd1bf480f1e701dbf6240992ea1ae')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '77bc277994bda8c1aaa8bc2b42fc7866')"
     ]
   }
 }
