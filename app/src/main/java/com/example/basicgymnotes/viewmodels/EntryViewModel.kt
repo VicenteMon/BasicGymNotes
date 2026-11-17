@@ -50,4 +50,11 @@ class EntryViewModel(
 
     }
 
+    fun deleteEntry(entry: Entry){
+        viewModelScope.launch {
+            detailRepository.delete(entry)
+            loadDetails(machineId)
+        }
+    }
+
 }

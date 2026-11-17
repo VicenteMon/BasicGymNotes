@@ -46,6 +46,12 @@ fun DetailScreen(
             )
             for(entry: Entry in uiState.machineWhitEntries?.entries!!) {
                 Text(text = "Peso: ${entry.weight} Fecha: ${entry.date}")
+                Button(onClick = {
+                    viewModel.deleteEntry(entry)
+
+                }){
+                    Text("Eliminar")
+                }
             }
         }
 

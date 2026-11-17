@@ -1,6 +1,7 @@
 package com.example.basicgymnotes.daos
 
 import androidx.room3.Dao
+import androidx.room3.Delete
 import androidx.room3.Insert
 import androidx.room3.Query
 import com.example.basicgymnotes.entities.Entry
@@ -12,4 +13,7 @@ interface EntryDao {
 
     @Insert
     suspend fun create(entry: Entry)
+
+    @Delete
+    suspend fun delete(entry: Entry)
 }

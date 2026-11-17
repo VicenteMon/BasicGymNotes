@@ -14,4 +14,8 @@ class DetailRepository(
     suspend fun create(entry: Entry){
         dao.create(entry)
     }
+
+    suspend fun delete(entry: Entry){
+        dao.delete(entry)
+    }
 }
