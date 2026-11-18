@@ -32,6 +32,10 @@ fun MachineMainScreen(
         Text(fontWeight = FontWeight.Bold, text = "Machine Main Screen:" + uiState.machineList.size)
         uiState.machineList.forEach { machine ->
             Text(text = "Nombre: " + machine.name)
+            Button(onClick = { navigateToDetailScreen(machine.id) }) {
+                Text(text = "Ir a detalle")
+
+            }
         }
         Button(onClick = {viewModel.loadMachines()}, content = {Text(text = "Load Machines")})
     }

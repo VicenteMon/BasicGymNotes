@@ -1,6 +1,7 @@
 package com.example.basicgymnotes.navigation
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -38,6 +39,7 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                     )
                     MachineMainScreen(viewModel) { id ->
                         backStack.add(Detail(id))
+                        Log.d("MachinesViewModel", "Navigating to Detail $id")
                     }
                 }
                 is Detail -> NavEntry(key){
@@ -47,12 +49,12 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                         factory = GenericViewModelFactory(
                             EntryViewModel::class.java
                         ) {
-                            EntryViewModel(machineRepository, detailRepository, key.machineId)
+                            EntryViewModel(machineRepository, detailRepository)
                         }
                     )
                     DetailScreen(viewModel, {
                         backStack.removeLastOrNull()
-                    })
+                    }, key.machineId)
                 }
                 else -> NavEntry(Unit) { Text("Unknown route") }
             }

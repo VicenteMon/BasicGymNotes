@@ -14,15 +14,10 @@ import kotlinx.coroutines.launch
 class EntryViewModel(
     private val repository: MachineRepository,
     private val detailRepository: DetailRepository,
-    private val machineId: Int,
 ): ViewModel() {
     private val _uiState = MutableStateFlow(DetailScreenState())
 
     val uiState: StateFlow<DetailScreenState> get() = _uiState
-
-    init{
-        loadDetails(machineId)
-    }
 
     fun loadDetails(machineId: Int){
         viewModelScope.launch {
@@ -35,7 +30,7 @@ class EntryViewModel(
         _uiState.value = _uiState.value.copy(dataImput = data)
     }
 
-    fun createEntry(){
+    fun createEntry(machineId: Int){
         viewModelScope.launch {
             val entry: Entry = Entry(
                 machineId = machineId,
@@ -53,7 +48,7 @@ class EntryViewModel(
     fun deleteEntry(entry: Entry){
         viewModelScope.launch {
             detailRepository.delete(entry)
-            loadDetails(machineId)
+            loadDetails(entry.machineId)
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,8 +24,13 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 fun DetailScreen(
     viewModel: EntryViewModel,
     navigateToMainScreen: () -> Unit,
+    machineId: Int
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    LaunchedEffect(machineId) {
+        viewModel.loadDetails(machineId)
+    }
 
     Column (
         modifier = Modifier.padding(top = 20.dp)
@@ -36,7 +42,7 @@ fun DetailScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
         )
-        Button(onClick = {viewModel.createEntry()}) {
+        Button(onClick = {viewModel.createEntry(machineId) }) { Text(text = "Create")
             Text(text = "Crear")
         }
         if(uiState.machineWhitEntries != null){
