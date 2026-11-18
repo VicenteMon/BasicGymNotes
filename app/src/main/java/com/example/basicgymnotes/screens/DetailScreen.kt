@@ -14,10 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.basicgymnotes.entities.Entry
 import com.example.basicgymnotes.viewmodels.EntryViewModel
-import com.example.basicgymnotes.viewmodels.MachineViewModel
 
 
 @Composable
@@ -37,10 +35,11 @@ fun DetailScreen(
     ) {
         Button(onClick = navigateToMainScreen) { Text(text = "Volver") }
         TextField(
-            value = uiState.dataImput,
+            value = uiState.dataInput,
             onValueChange = {viewModel.setDataInput(it)},
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
+            isError = uiState.isInputInvalid
         )
         Button(onClick = {viewModel.createEntry(machineId) }) { Text(text = "Create")
             Text(text = "Crear")

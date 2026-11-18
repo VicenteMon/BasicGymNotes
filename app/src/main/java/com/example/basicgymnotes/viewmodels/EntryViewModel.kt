@@ -27,22 +27,33 @@ class EntryViewModel(
     }
 
     fun setDataInput (data: String) {
-        _uiState.value = _uiState.value.copy(dataImput = data)
+        _uiState.value = _uiState.value.copy(dataInput = data)
     }
 
-    fun createEntry(machineId: Int){
+    fun createEntry(machineId: Int) {
+        var input = 0.0f
+        try {
+            input = _uiState.value.dataInput.replace(",", ".").toFloat()
+
+        }catch (ex: NumberFormatException){
+            _uiState.value = _uiState.value.copy(isInputInvalid = true, dataInput = "")
+            Log.d("EntryViewModel", "No se ha podido guardar ${_uiState.value.dataInput}")
+            return
+        }
+
         viewModelScope.launch {
-            val entry: Entry = Entry(
+            val entry = Entry(
                 machineId = machineId,
-                weight = _uiState.value.dataImput.toFloat(),
+                weight = input,
                 date = "16/11/2026"
             )
 
             detailRepository.create(entry)
+            _uiState.value = _uiState.value.copy(isInputInvalid = false, dataInput = "")
 
             loadDetails(machineId)
-        }
 
+        }
     }
 
     fun deleteEntry(entry: Entry){
