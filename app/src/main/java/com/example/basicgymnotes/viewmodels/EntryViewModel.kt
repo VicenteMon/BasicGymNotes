@@ -10,6 +10,8 @@ import com.example.basicgymnotes.states.DetailScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.Calendar
+import java.util.Date
 
 class EntryViewModel(
     private val repository: MachineRepository,
@@ -45,7 +47,7 @@ class EntryViewModel(
             val entry = Entry(
                 machineId = machineId,
                 weight = input,
-                date = "16/11/2026"
+                date = Calendar.getInstance().time,
             )
 
             detailRepository.create(entry)

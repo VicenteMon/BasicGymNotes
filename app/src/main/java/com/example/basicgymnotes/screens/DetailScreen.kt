@@ -1,5 +1,6 @@
 package com.example.basicgymnotes.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,8 +17,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.basicgymnotes.entities.Entry
 import com.example.basicgymnotes.viewmodels.EntryViewModel
+import java.text.SimpleDateFormat
 
 
+@SuppressLint("SimpleDateFormat")
 @Composable
 fun DetailScreen(
     viewModel: EntryViewModel,
@@ -25,6 +28,8 @@ fun DetailScreen(
     machineId: Int
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    val format = SimpleDateFormat("hh:mm dd/M")
 
     LaunchedEffect(machineId) {
         viewModel.loadDetails(machineId)
@@ -50,7 +55,7 @@ fun DetailScreen(
                 text = uiState.machineWhitEntries?.machine!!.name
             )
             for(entry: Entry in uiState.machineWhitEntries?.entries!!) {
-                Text(text = "Peso: ${entry.weight} Fecha: ${entry.date}")
+                Text(text = "Peso: ${entry.weight} Fecha: ${format.format(entry.date)}")
                 Button(onClick = {
                     viewModel.deleteEntry(entry)
 
