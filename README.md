@@ -23,20 +23,22 @@ La aplicación se va a componer en 2 pantallas, el listado de todos los ejercici
 
 El desarrollo se subirá en GitHub https://github.com/VicenteMon/BasicGymNotes.git. A continuación se desarrolla con ha ido el proceso de desarrollo por días y tareas.
 
-- [ ]  Implementación de Room
-- [ ]  Implementación Navigation3
+- [x]  Implementación de Room
+- [x]  Implementación Navigation3
 - [ ]  Crear componente de la lista principal (ejercicios/máquinas)
 - [ ]  Crear componente de búsqueda
-- [ ]  Crear vista principal
+- [x]  Crear vista principal
 - [ ]  Crear componente para crear registros
 - [ ]  Crear botón para persistir los datos
 - [ ]  Crear componente para listar las anotaciones creadas
+
+Tareas Pendientes
 
 ### 2.1 Diseño de la base de datos
 
 Para la primera versión de esta aplicación solo se va a necesitar dos tablas. Una para registrar las máquinas que van a componer la aplicación, y otra para los registros creados por el usuario, con una relación entre ellas de Uno a Muchos (1:N).
 
-![Esquema](src/database.png)
+![Base de datos](src/database.png)
 
 #### Links importantes:
 
