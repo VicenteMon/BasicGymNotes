@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
+import com.example.basicgymnotes.components.MachineListComponent
 import com.example.basicgymnotes.viewmodels.MachineViewModel
 
 
@@ -35,11 +36,7 @@ fun MachineMainScreen(
         )
         Text(fontWeight = FontWeight.Bold, text = "Machine Main Screen:" + uiState.machineList.size)
         uiState.machineList.forEach { machine ->
-            Text(text = "Nombre: " + machine.name)
-            Button(onClick = { navigateToDetailScreen(machine.id) }) {
-                Text(text = "Ir a detalle")
-
-            }
+            MachineListComponent(machine = machine, navigateToDetailScreen = navigateToDetailScreen)
         }
         Button(onClick = {viewModel.loadMachines()}, content = {Text(text = "Load Machines")})
     }
