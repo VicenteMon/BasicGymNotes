@@ -19,6 +19,8 @@ class MachineViewModel(
 
     val uiState: StateFlow<MachineScreenState> get() = _uiState
 
+    var mainList: List<Machine> = listOf()
+
     init{
         loadMachines()
     }
@@ -26,15 +28,17 @@ class MachineViewModel(
 
     fun loadMachines(){
         viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(machineList = repository.getAllMachines())
+            mainList = repository.getAllMachines()
+            _uiState.value = _uiState.value.copy(machineList = mainList)
             Log.d("MachinesViewModel", _uiState.value.machineList.toString())
         }
     }
 
+    // TODO: Mejorar con la búsqueda en base de datos
     fun filterMachine(searchText: String){
         _uiState.value = _uiState.value.copy(searchText = searchText)
 
-        val machineListFiltered: List<Machine> = _uiState.value.machineList.filter { machine ->
+        val machineListFiltered: List<Machine> = mainList.filter { machine ->
             machine.name.normalizeText().contains(
                 _uiState.value.searchText.normalizeText()
             )
