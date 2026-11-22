@@ -3,13 +3,16 @@ package com.example.basicgymnotes.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import com.example.basicgymnotes.viewmodels.MachineViewModel
@@ -25,10 +28,12 @@ fun MachineMainScreen(
     Column (
         modifier = Modifier.padding(20.dp)
     ) {
-
-        Button(onClick = { navigateToDetailScreen(1)}) {
-            Text(text = "Ir a detalle")
-        }
+        TextField(
+            value = uiState.searchText,
+            onValueChange = {viewModel.filterMachine(it)},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true,
+        )
         Text(fontWeight = FontWeight.Bold, text = "Machine Main Screen:" + uiState.machineList.size)
         uiState.machineList.forEach { machine ->
             Text(text = "Nombre: " + machine.name)

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.basicgymnotes.entities.Machine
 import com.example.basicgymnotes.repositories.MachineRepository
 import com.example.basicgymnotes.states.MachineScreenState
+import com.example.basicgymnotes.utils.normalizeText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,6 +29,18 @@ class MachineViewModel(
             _uiState.value = _uiState.value.copy(machineList = repository.getAllMachines())
             Log.d("MachinesViewModel", _uiState.value.machineList.toString())
         }
+    }
+
+    fun filterMachine(searchText: String){
+        _uiState.value = _uiState.value.copy(searchText = searchText)
+
+        val machineListFiltered: List<Machine> = _uiState.value.machineList.filter { machine ->
+            machine.name.normalizeText().contains(
+                _uiState.value.searchText.normalizeText()
+            )
+        }
+
+        _uiState.value = _uiState.value.copy(machineList = machineListFiltered)
     }
 
 }
