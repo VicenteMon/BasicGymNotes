@@ -31,7 +31,6 @@ fun MachineMainScreen(
         TextField(
             value = uiState.searchText,
             onValueChange = {viewModel.filterMachine(it)},
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
         )
         Text(fontWeight = FontWeight.Bold, text = "Machine Main Screen:" + uiState.machineList.size)
