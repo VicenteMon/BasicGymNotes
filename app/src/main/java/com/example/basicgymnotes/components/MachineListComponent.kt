@@ -5,6 +5,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import com.example.basicgymnotes.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,9 +30,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,6 +46,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.basicgymnotes.entities.Machine
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun MachineListComponent(
@@ -46,9 +55,10 @@ fun MachineListComponent(
     navigateToDetailScreen: (id: Int) -> Unit
 )
 {
+    var isPressed by remember { mutableStateOf(false) }
     Row(
         Modifier.fillMaxWidth()
-            .background(Color.Gray).padding(vertical = 15.dp, horizontal = 15.dp),
+            .background(if(!isPressed) Color.LightGray else Color.Black).padding(vertical = 15.dp, horizontal = 15.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -71,9 +81,17 @@ fun MachineListComponent(
             )
         }
         Box(
-            modifier = Modifier.weight(0.3f).clickable(onClick = {
-                navigateToDetailScreen(machine.id)
-            }),
+            modifier = Modifier.weight(0.3f).pointerInput(Unit) {
+                detectTapGestures (
+                    onPress = {
+                        isPressed = true
+                    },
+                    onTap = {
+                        isPressed = false
+                        navigateToDetailScreen(machine.id)
+                    }
+                )
+            },
             contentAlignment = Alignment.TopEnd
         ){
             Icon(modifier = Modifier.padding(end = 20.dp), imageVector = Icons.Filled.Add, contentDescription = null)
