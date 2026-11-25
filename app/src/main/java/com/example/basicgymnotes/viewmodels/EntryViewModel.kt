@@ -25,11 +25,18 @@ class EntryViewModel(
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(machineWhitEntries = repository.getEntriesByMachineId(machineId))
             Log.d("EntryViewModel", _uiState.value.machineWhitEntries.toString())
+            getMaxWeight()
         }
     }
 
     fun setDataInput (data: String) {
         _uiState.value = _uiState.value.copy(dataInput = data)
+    }
+
+    fun getMaxWeight(){
+        _uiState.value = _uiState.value.copy(maxWeight = _uiState.value.machineWhitEntries?.entries!!.sortedByDescending {
+            it.weight
+        }.first().weight)
     }
 
     fun createEntry(machineId: Int) {

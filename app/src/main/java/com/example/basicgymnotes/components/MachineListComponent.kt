@@ -63,7 +63,7 @@ fun MachineListComponent(
 
     Row(
         Modifier.fillMaxWidth()
-            .background(if(!isPressed) Color.LightGray else Color.Black).padding(vertical = 15.dp, horizontal = 15.dp),
+            .background(if(!isPressed) Color.White else Color.LightGray).padding(vertical = 15.dp, horizontal = 15.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

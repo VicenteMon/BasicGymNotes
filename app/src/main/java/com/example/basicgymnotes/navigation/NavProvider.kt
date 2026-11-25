@@ -2,10 +2,12 @@ package com.example.basicgymnotes.navigation
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.Dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
@@ -20,7 +22,7 @@ import com.example.basicgymnotes.viewmodels.MachineViewModel
 import kotlinx.serialization.Serializable
 
 @Composable
-fun NavProvider(applicationContext: Context, db: AppDatabase) {
+fun NavProvider(applicationContext: Context, db: AppDatabase, innerPadding: PaddingValues) {
     val backStack = remember { mutableStateListOf<Any>(Home) }
 
     NavDisplay(
@@ -37,7 +39,7 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                             MachineViewModel(machineRepository)
                         }
                     )
-                    MachineMainScreen(viewModel) { id ->
+                    MachineMainScreen(innerPadding, viewModel) { id ->
                         backStack.add(Detail(id))
                         Log.d("MachinesViewModel", "Navigating to Detail $id")
                     }
@@ -52,7 +54,7 @@ fun NavProvider(applicationContext: Context, db: AppDatabase) {
                             EntryViewModel(machineRepository, detailRepository)
                         }
                     )
-                    DetailScreen(viewModel, {
+                    DetailScreen(innerPadding, viewModel, {
                         backStack.removeLastOrNull()
                     }, key.machineId)
                 }
