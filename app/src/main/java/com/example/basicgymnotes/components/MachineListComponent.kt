@@ -1,5 +1,6 @@
 package com.example.basicgymnotes.components
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import com.example.basicgymnotes.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,6 +58,9 @@ fun MachineListComponent(
 )
 {
     var isPressed by remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
+
+
     Row(
         Modifier.fillMaxWidth()
             .background(if(!isPressed) Color.LightGray else Color.Black).padding(vertical = 15.dp, horizontal = 15.dp),
@@ -68,7 +73,7 @@ fun MachineListComponent(
             verticalAlignment = Alignment.CenterVertically
         ){
             Image(
-                painter = painterResource(R.drawable.pooping),
+                painter = painterResource(if(machine.isMachine) R.drawable.machine else R.drawable.free_weight),
                 contentDescription = null,
                 Modifier.size(60.dp).padding(end = 5.dp)
             )
@@ -81,17 +86,14 @@ fun MachineListComponent(
             )
         }
         Box(
-            modifier = Modifier.weight(0.3f).pointerInput(Unit) {
-                detectTapGestures (
-                    onPress = {
-                        isPressed = true
-                    },
-                    onTap = {
-                        isPressed = false
-                        navigateToDetailScreen(machine.id)
-                    }
-                )
-            },
+            modifier = Modifier.weight(0.3f).clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = {
+                    isPressed = true
+                    navigateToDetailScreen(machine.id)
+                }
+            ),
             contentAlignment = Alignment.TopEnd
         ){
             Icon(modifier = Modifier.padding(end = 20.dp), imageVector = Icons.Filled.Add, contentDescription = null)
@@ -103,6 +105,6 @@ fun MachineListComponent(
 @Composable
 @Preview
 fun MachineListComponentPreview() {
-    val machine = Machine(1, "Nombre", "src/image.png")
+    val machine = Machine(1, "Nombre", true, null)
     MachineListComponent(machine = machine, navigateToDetailScreen = {/*TODO*/})
 }
