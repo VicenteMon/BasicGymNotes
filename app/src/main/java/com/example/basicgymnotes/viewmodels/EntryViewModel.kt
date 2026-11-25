@@ -47,6 +47,7 @@ class EntryViewModel(
             val entry = Entry(
                 machineId = machineId,
                 weight = input,
+                repetitions = null,
                 date = Calendar.getInstance().time,
             )
 

@@ -7,5 +7,6 @@ import androidx.room3.PrimaryKey
 data class Machine (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
-    val image: String,
+    val isMachine: Boolean,
+    val image: String?,
 )

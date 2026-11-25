@@ -1,5 +1,6 @@
 package com.example.basicgymnotes.repositories
 
+import android.util.Log
 import com.example.basicgymnotes.database.AppDatabase
 import com.example.basicgymnotes.entities.Machine
 import com.example.basicgymnotes.entities.MachineWhitEntry

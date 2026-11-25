@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6e66570162f575585982f2f3fe078737",
+    "identityHash": "97fc0a6f54099e87f1b89dd95618f16a",
     "entities": [
       {
         "tableName": "Machine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `isMachine` INTEGER NOT NULL, `image` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,10 +21,15 @@
             "notNull": true
           },
           {
+            "fieldPath": "isMachine",
+            "columnName": "isMachine",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "image",
             "columnName": "image",
-            "affinity": "TEXT",
-            "notNull": true
+            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
@@ -36,7 +41,7 @@
       },
       {
         "tableName": "Entry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `machineId` INTEGER NOT NULL, `weight` REAL NOT NULL, `date` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `machineId` INTEGER NOT NULL, `weight` REAL NOT NULL, `repetitions` INTEGER, `date` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -57,6 +62,11 @@
             "notNull": true
           },
           {
+            "fieldPath": "repetitions",
+            "columnName": "repetitions",
+            "affinity": "INTEGER"
+          },
+          {
             "fieldPath": "date",
             "columnName": "date",
             "affinity": "INTEGER",
@@ -73,7 +83,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6e66570162f575585982f2f3fe078737')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '97fc0a6f54099e87f1b89dd95618f16a')"
     ]
   }
 }

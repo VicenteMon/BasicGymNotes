@@ -9,5 +9,6 @@ data class Entry (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val machineId: Int,
     val weight: Float,
+    val repetitions: Int?,
     val date: Date,
 )

@@ -1,5 +1,6 @@
 package com.example.basicgymnotes.database
 
+import android.util.Log
 import androidx.room3.RoomDatabase
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
@@ -12,48 +13,60 @@ class DatabaseSeed : RoomDatabase.Callback() {
     val machines = listOf(
         Machine(
             name = "Press Banca",
-            image = "src/press_banca.png"
+            isMachine = false,
+            image = null
+
         ),
         Machine(
             name = "Press Banca Inclinado",
-            image = "src/press_banca_inclinado.png"
+            isMachine = false,
+            image = null
         ),
         Machine(
             name = "Aperturas",
-            image = "src/aperturas.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Extensión de triceps en polea baja",
-            image = "src/extension_de_triceps_en_polea_baja.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Extensión de triceps en polea alta",
-            image = "src/extension_de_triceps_en_polea_alta.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Jalón al Pecho",
-            image = "src/jalon_al_pecho.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Remo",
-            image = "src/remo.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Aperturas inversas en máquina",
-            image = "src/aperturas_inversas_en_maquina.png"
+            isMachine = true,
+            image = null
         ),
         Machine(
             name = "Curl de biceps predicador",
-            image = "src/curl_de_biceps_predicador.png"
+            isMachine = false,
+            image = null
         ),
         Machine(
             name = "Curl de biceps inclinado",
-            image = "src/curl_de_biceps_inclinado.png"
+            isMachine = false,
+            image = null
         ),
         // TODO: Añadir los ejercicios del día de pierna
         Machine(
             name = "Cuádriceps",
-            image = "src/cuadriceps.png"
+            isMachine = true,
+            image = null
         ),
 
     )
@@ -64,11 +77,11 @@ class DatabaseSeed : RoomDatabase.Callback() {
 
             connection.execSQL(
                 """
-                INSERT INTO Machine (name, image)
-                VALUES ('${machine.name}', '${machine.image}')
+                INSERT INTO Machine (name, isMachine)
+                VALUES ('${machine.name}', ${machine.isMachine})
                 """.trimIndent()
             )
-
+            Log.d("DatabaseSeed", "machine ${machine.toString()}")
         }
     }
 }
