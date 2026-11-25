@@ -1,7 +1,6 @@
 package com.example.basicgymnotes.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,10 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -62,12 +59,17 @@ fun MachineMainScreen(
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
-        LazyColumn {
-            items(uiState.machineList){ machine ->
-                MachineListComponent(machine = machine, navigateToDetailScreen = navigateToDetailScreen)
-                Box(modifier = Modifier.fillMaxSize().background(Color.LightGray).height(1.dp))
+        if(uiState.machineList.isNotEmpty()) {
+            LazyColumn {
+                items(uiState.machineList){ machine ->
+                    MachineListComponent(machine = machine, navigateToDetailScreen = navigateToDetailScreen)
+                    Box(modifier = Modifier.fillMaxSize().background(Color.LightGray).height(1.dp))
+                }
             }
+        }else{
+            CircularProgressIndicator()
         }
+
     }
 
 }
